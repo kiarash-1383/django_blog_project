@@ -1,0 +1,40 @@
+{#{% extends 'base.html' %}#}
+{#{% load blog %}#}
+{#{% block title %}#}
+{#comment section#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% block content %}#}
+{##}
+{#    {% if comment %}#}
+{#        <p>یک کامنت جدید ساخته شد </p>#}
+{#        {% list_file %}#}
+{#        {% else %}#}
+{#        <p>ridi</p>#}
+{#    {% endif %}#}
+{##}
+{#{% endblock %}#}
+
+{% extends 'base.html' %}
+{% load blog %}
+
+{% block title %}بخش نظرات{% endblock %}
+
+{% block content %}
+<div class="comment-section-page">
+
+    {% if comment %}
+        <div class="alert-success">
+            <p>✔ یک نظر جدید ثبت شد.</p>
+        </div>
+        <a href="{% url 'project1:inner_post' post.id  %}" class="post_btn">بازگشت به پست > </a>
+
+    {% else %}
+        <div class="alert-error">
+            <p>نظری یافت نشد.</p>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

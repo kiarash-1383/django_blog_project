@@ -1,0 +1,29 @@
+{#{% if page_obj.has_previous %}#}
+{#    <a href="?page={{ page_obj.previous_page_number }}">previous</a>#}
+{#{% endif %}#}
+{##}
+{#{% for number in page_obj.paginator.page_range %}#}
+{#    <a href="?page={{ number }}">{{ number }}</a>#}
+{#{% endfor %}#}
+{##}
+{#{% if page_obj.has_next %}#}
+{#    <a href="?page={{ page_obj.next_page_number }}">next</a>#}
+{#{% endif %}#}
+{##}
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-btn">&laquo; قبلی</a>
+    {% endif %}
+
+    {% for number in page_obj.paginator.page_range %}
+        <a href="?page={{ number }}"
+           class="page-btn {% if number == page_obj.number %}active{% endif %}">
+            {{ number }}
+        </a>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="page-btn">بعدی &raquo;</a>
+    {% endif %}
+</div>

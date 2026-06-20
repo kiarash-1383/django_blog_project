@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ticket
+{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="name">name</label>
+    <input type="text" name="name" id="name">
+    <span>{{ form.name.errors }}</span>
+    <label for="email">email</label>
+    <input type="email" name="email" id="email">
+
+    <label for="description">description</label>
+    <textarea name="description" id="description"></textarea>
+
+    <label for="type">type</label>
+    <select name="type" id="type">
+        <option value="bug">Bug</option>
+        <option value="pirincimpe">pirincimpe</option>
+        <option value="nothing">nothing</option>
+    </select>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+{% endblock %}

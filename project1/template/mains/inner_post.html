@@ -1,0 +1,50 @@
+{#{% extends '../base.html' %}#}
+{#{% load blog %}#}
+{#{% block title %} inner one {% endblock %}#}
+{##}
+{#{% block content %}#}
+{##}
+{#    <p>comment_count : {{ post.comments.count }}</p>#}
+{#    <br>#}
+{#    <h1>{{ post.title }}</h1>#}
+{#    <hr>#}
+{#    <p>{{ post.description }}</p>#}
+{##}
+{#    <!-- اصلاح: method="POST" به جای type="Post" -->#}
+{#    <form method="POST" action="{% url 'project1:comment_view' post.id %}">#}
+{#      {% csrf_token %}#}
+{#      {{ form.as_p }}#}
+{#      <button type="submit">ارسال نظر</button>#}
+{#    </form>#}
+{##}
+{#{% endblock %}#}
+{% extends '../base.html' %}
+{% load blog %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<article class="post-detail">
+
+    <header class="post-header">
+        <h1>{{ post.title }}</h1>
+        <span class="comment-count">💬 {{ post.comments.count }} نظر</span>
+    </header>
+
+    <hr class="divider">
+
+    <div class="post-body">
+        <p>{{ post.description }}</p>
+    </div>
+
+    <section class="comment-section">
+        <h3>ارسال نظر</h3>
+        <form method="POST" action="{% url 'project1:comment_view' post.id %}" class="comment-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-submit">ارسال نظر</button>
+        </form>
+    </section>
+
+</article>
+{% endblock %}
