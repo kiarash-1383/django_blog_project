@@ -1,4 +1,6 @@
 from django.db import models
+from django.template.context_processors import request
+from django.urls import reverse # اضافه کردن این برای URLها
 
 class CustomPostManager (models.Manager):
     def get_queryset(self):
@@ -23,6 +25,9 @@ class Post(models.Model):
 
     objects = models.Manager()
     contain_post = CustomPostManager()
+
+    def get_absolute_url(self):
+        return reverse('project1:inner_post', args=[self.id])
     def __str__(self):
         return self.title
 
@@ -34,7 +39,7 @@ class Ticket(models.Model):
     name = models.CharField(max_length=250)
     email = models.EmailField()
     description = models.TextField()
-    type = models.CharField(choices=Choices.choices )
+    type = models.CharField(max_length=10,choices=Choices.choices )
 
 class Comment (models.Model):
 

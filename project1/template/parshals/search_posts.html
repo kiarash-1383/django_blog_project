@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} جستجو {% endblock %}
+
+{% block content %}
+    <div class="main-container"> <!-- استفاده از کلاس‌های CSS که قبلا داشتید -->
+        {% if results %}
+            <h2 class="sidebar-title">نتایج جستجو:</h2>
+            <div class="post-list-container">
+                {% for post in results %}
+                    <div class="post-card">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.description }}</p>
+
+                        {# لینک به صفحه جزئیات پست #}
+                        <a href="{{ post.get_absolute_url }}" class="post_btn">
+                            ادامه
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-msg">متاسفانه نتیجه‌ای پیدا نشد.</p>
+        {% endif %}
+    </div>
+{% endblock %}

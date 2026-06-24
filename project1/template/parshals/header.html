@@ -5,6 +5,11 @@
 <header class="header-container">
     <div class="header-inner">
         <h1 class="site-title">My Django Blog</h1>
+        <form method="get" action="{% url 'project1:search_view' %}" class="search-form">
+              {% csrf_token %}
+              <input type="search" name="query" placeholder="دنبال چه چیزی هستید؟" aria-label="Search">
+              <button type="submit">جستجو</button>
+        </form>
         <nav class="header-nav">
             <a href="/">خانه</a>
             <a href="/about">درباره ما</a>

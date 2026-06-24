@@ -9,4 +9,5 @@ urlpatterns = [
     path('inner_post/<int:id>/', views.inner_post, name='inner_post'), # اضافه کردن اسلش
     path('ticket/', views.ticket, name='ticket'),                     # اضافه کردن اسلش
     path('post/<int:post_id>/comment/', views.comment_view, name='comment_view'), # اضافه کردن اسلش
+    path('search/', views.search, name='search_view'),
 ]

@@ -1,6 +1,7 @@
 from random import choices
 from .models import *
 from django import  forms
+from django.core.exceptions import ValidationError
 
 class TicketForm(forms.Form):
 
@@ -32,3 +33,23 @@ class CommentForm(forms.ModelForm):
         if title.isnumeric():
             raise forms.ValidationError('Title shudent be numeric')
         return title
+
+
+class SearchForm(forms.Form):
+    # اضافه کردن کلاس CSS برای هماهنگی با استایلی که قبلاً نوشتیم
+    query = forms.CharField(
+        max_length=250,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'دنبال چه چیزی هستید؟',
+            'class': 'search-input'
+        })
+    )
+
+    def clean_query(self):
+        query = self.cleaned_data.get('query')
+
+        if query and not query.strip():
+            raise ValidationError('فیلد جستجو نمی‌تواند خالی باشد.')
+
+        return query

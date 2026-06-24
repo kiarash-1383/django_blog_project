@@ -70,3 +70,17 @@ def comment_view(request , post_id):
        return render(request , 'froms/comment.html' , context={  'comment': comment , 'post' : post } )
     return render(request , 'froms/comment.html' , context={  'form' : form, 'post' : post } )
 
+def search(request):
+    form = SearchForm(request.GET or None)
+    results = []
+    query = None
+
+    if form.is_valid():
+        query = form.cleaned_data.get('query')
+        results = Post.objects.filter(title__icontains=query)
+
+    return render(request, 'parshals/search_posts.html', {
+        'form': form,
+        'results': results,
+        'query': query
+    })
